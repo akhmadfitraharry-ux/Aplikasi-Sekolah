@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SD Negeri Pelangi – Website Sekolah</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#17306b;--sky:#e8f2ff;--sun:#ffc83d;--leaf:#2fa36b;--ink:#1d2433;--mute:#5d6578;--line:#d9e2f2;--bg:#fbfcff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font:16px/1.6 Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;line-height:1.15;margin:0 0 .5rem;color:var(--navy)}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff}
+.bar{display:flex;align-items:center;gap:14px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.15rem "Baloo 2",sans-serif;text-decoration:none}
+.brand img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--sun)}
+nav{margin-left:auto;display:flex;gap:4px;overflow-x:auto}
+nav a{padding:6px 12px;border-radius:99px;text-decoration:none;font-weight:700;font-size:.92rem;white-space:nowrap}
+nav a:hover,nav a:focus-visible{background:rgba(255,255,255,.16);outline:none}
+nav a.cta{background:var(--sun);color:var(--navy)}
+.hero{background:var(--sky);border-bottom:6px solid var(--sun)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;padding-top:44px;padding-bottom:44px}
+.hero h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:800}
+.hero p{color:var(--mute);max-width:46ch}
+.hero .photo{aspect-ratio:4/3;border-radius:28px 28px 120px 28px;background:#c9dcf7 center/cover;box-shadow:10px 10px 0 var(--sun)}
+.btn{display:inline-block;border:0;background:var(--navy);color:#fff;padding:10px 20px;border-radius:99px;font:700 1rem Nunito,sans-serif;cursor:pointer;text-decoration:none}
+.btn.alt{background:var(--sun);color:var(--navy)}
+.btn.sm{padding:6px 14px;font-size:.88rem}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+section{padding:48px 0}
+section h2{font-size:2rem}
+.sub{color:var(--mute);margin:0 0 22px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.news article{border-left:5px solid var(--leaf);background:#fff;padding:14px 18px;border-radius:0 14px 14px 0;box-shadow:0 1px 0 var(--line)}
+.news time{font-size:.82rem;color:var(--mute)}
+.news h3{font-size:1.2rem;margin:2px 0}
+.grades{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.grades div{text-align:center;padding:16px 6px;border-radius:18px;background:var(--c);font:800 1.1rem "Baloo 2",sans-serif;color:var(--navy)}
+.grades small{display:block;font:600 .75rem Nunito,sans-serif}
+.agenda li{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line);list-style:none}
+.agenda ul{padding:0;margin:0}
+.agenda b{min-width:96px;color:var(--leaf)}
+.gal{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.gal div{aspect-ratio:1;border-radius:16px;background:var(--c) center/cover}
+.contact{background:var(--navy);color:#fff}
+.contact h2,.contact h3{color:#fff}
+.cwrap{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.contact dl{margin:0}.contact dt{font-weight:700;color:var(--sun);margin-top:12px}.contact dd{margin:0}
+.cimg{margin-top:18px;border-radius:18px;max-width:100%;max-height:260px;object-fit:cover}
+.panel{background:#fff;color:var(--ink);border-radius:20px;padding:20px}
+.panel h3{color:var(--navy)}
+label{display:block;font-weight:700;font-size:.88rem;margin-top:10px}
+input,textarea,select{width:100%;padding:9px 11px;border:2px solid var(--line);border-radius:10px;font:inherit}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.msg{font-size:.88rem;color:var(--leaf);margin-top:8px;min-height:1.2em}
+.hide{display:none}
+footer{text-align:center;padding:18px;color:var(--mute);font-size:.88rem}
+@media(max-width:760px){.hero .wrap,.cwrap{grid-template-columns:1fr}.grades{grid-template-columns:repeat(3,1fr)}nav{margin-left:0}.bar{flex-wrap:wrap;padding:8px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.adminbar{background:#0d1b3d;color:#fff;font-size:.88rem}
+.adminbar .wrap{display:flex;align-items:center;gap:10px;min-height:40px}
+.adminbar span{margin-right:auto;opacity:.85}
+.adminbar .btn{padding:3px 14px;font-size:.84rem}
+.drawer{display:none;background:var(--sky);border-bottom:6px solid var(--sun)}
+.drawer.open{display:block}
+.drawer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;padding-top:20px;padding-bottom:20px}
+.drawer .panel{box-shadow:0 5px 0 var(--line),0 12px 20px rgba(23,48,107,.15)}
+/* 3D */
+.hero{perspective:1200px}
+.hero h1{text-shadow:1px 1px 0 var(--sun),2px 2px 0 var(--sun),3px 3px 0 #e0a500,4px 4px 0 #c18b00,6px 8px 10px rgba(23,48,107,.3)}
+.hero .photo,.news article,.grades div,.gal div{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s ease-out;will-change:transform}
+.hero .photo{--ry:-10deg;--rx:5deg;box-shadow:10px 10px 0 var(--sun),18px 22px 28px rgba(23,48,107,.35)}
+.news article{box-shadow:3px 3px 0 #1e7d50,6px 6px 0 #17653f,10px 14px 22px rgba(23,48,107,.22)}
+.grades div{box-shadow:0 6px 0 rgba(23,48,107,.38),0 14px 18px rgba(23,48,107,.2)}
+.gal div{box-shadow:0 5px 0 rgba(23,48,107,.3),0 12px 16px rgba(23,48,107,.18)}
+.btn{box-shadow:0 4px 0 rgba(0,0,0,.3);transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.3)}
+.stage{position:relative}
+.coinwrap{position:absolute;left:8px;bottom:-36px;width:100px;height:100px;perspective:600px}
+.coin{position:relative;width:100px;height:100px;transform-style:preserve-3d;animation:flip 8s linear infinite}
+.coin img,.coin i{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;border:4px solid var(--navy)}
+.coin img{object-fit:cover;background:var(--sun);backface-visibility:hidden}
+#coinF{transform:translateZ(8px)}
+#coinB{transform:rotateY(180deg) translateZ(8px)}
+.coin i{background:#e0a500;border-color:#b88400;transform:translateZ(var(--z))}
+@keyframes flip{from{transform:rotateX(-14deg) rotateY(0)}to{transform:rotateX(-14deg) rotateY(360deg)}}
+.cimg{width:100%}
+@media(prefers-reduced-motion:reduce){.coin,.rv{animation:none;transition:none}.hero .photo,.news article,.grades div,.gal div{transition:none}}
+.pform{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;max-width:760px;box-shadow:0 6px 0 var(--line),0 14px 22px rgba(23,48,107,.15)}
+.pform .full{grid-column:1/-1}
+.pitem{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+@media(max-width:760px){.pform{grid-template-columns:1fr}}
+.statband{background:var(--navy);color:#fff}
+.statband .wrap{display:flex;justify-content:space-around;gap:12px;padding-top:18px;padding-bottom:18px;text-align:center}
+.statband b{display:block;font:800 2.2rem "Baloo 2",sans-serif;color:var(--sun);text-shadow:2px 2px 0 rgba(0,0,0,.35)}
+.sam{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;margin-bottom:28px}
+.kimg{aspect-ratio:1;border-radius:24px;background:#c9dcf7 center/cover;box-shadow:8px 8px 0 var(--sun)}
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vm ul,#pres{margin:0;padding-left:20px}
+.gurus{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));margin-top:10px}
+.gu{text-align:center}
+.gu .av{width:96px;height:96px;margin:0 auto 6px;border-radius:50%;background:var(--sun) center/cover;display:grid;place-items:center;font:800 2rem "Baloo 2",sans-serif;color:var(--navy);box-shadow:0 5px 0 rgba(23,48,107,.3)}
+.gu span{display:block;font-size:.85rem;color:var(--mute)}
+.grades div{cursor:pointer}.grades .on{outline:3px solid var(--navy)}
+.kd{margin-top:18px}.kd ul{padding-left:20px;margin:0}
+.map{width:100%;height:240px;border:0;border-radius:18px;margin-top:16px}
+.wafl{position:fixed;right:16px;bottom:16px;z-index:6;background:#25a35a;color:#fff;padding:10px 18px;border-radius:99px;font-weight:700;text-decoration:none;box-shadow:0 4px 0 #17703b,0 10px 18px rgba(0,0,0,.25)}
+#annAdm .pitem,#gl .pitem{align-items:center}
+@media(max-width:760px){.sam,.vm{grid-template-columns:1fr}}
+header.top{box-shadow:0 6px 0 #0d1b3d,0 12px 20px rgba(0,0,0,.3)}
+.brand img{box-shadow:0 3px 0 rgba(0,0,0,.35)}
+nav a{background:rgba(255,255,255,.08);box-shadow:0 3px 0 rgba(0,0,0,.35);transition:transform .1s,box-shadow .1s}
+nav a:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.35)}
+nav a.cta{box-shadow:0 3px 0 #c18b00}
+section h2{text-shadow:1px 1px 0 var(--sun),2px 2px 0 #e0a500,3px 3px 0 #c18b00,4px 6px 8px rgba(23,48,107,.25)}
+.contact h2{text-shadow:1px 1px 0 #0d1b3d,2px 2px 0 #0d1b3d,3px 5px 8px rgba(0,0,0,.45)}
+.panel{box-shadow:0 6px 0 var(--line),0 14px 22px rgba(23,48,107,.15)}
+.vm .panel,#stats div,.gu,.kimg,.cimg{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s ease-out}
+#stats div{padding:8px 18px;border-radius:16px;background:rgba(255,255,255,.08);box-shadow:0 5px 0 rgba(0,0,0,.4),0 12px 16px rgba(0,0,0,.25)}
+.cimg,.map{box-shadow:0 6px 0 rgba(0,0,0,.35),0 14px 22px rgba(0,0,0,.3)}
+input,textarea,select{box-shadow:inset 0 3px 0 rgba(23,48,107,.1)}
+footer{background:var(--navy);color:#cfd8ee;box-shadow:inset 0 6px 0 var(--sun)}
+.rv{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(30px);transition:opacity .6s,transform .6s}
+.rv.in{opacity:1;transform:none}
+.rb{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="adminbar"><div class="wrap"><span>Area pengelola sekolah</span><button class="btn alt" id="adm">Masuk admin</button></div></div>
+<div class="drawer" id="drawer"><div class="wrap">
+  <div class="panel hide" id="login">
+    <h3>Masuk sebagai admin</h3>
+    <label for="em" id="eml">Email admin</label><input id="em" type="email" autocomplete="username"><label for="pw">Kata sandi</label><input id="pw" type="password" autocomplete="current-password">
+    <div class="row"><button class="btn" id="goLogin">Masuk</button></div>
+    <div class="msg" id="lmsg" style="color:#c0392b"></div>
+  </div>
+  <div class="panel hide" id="admin">
+    <h3>Data sekolah dan foto</h3>
+    <label for="fn">Nama sekolah</label><input id="fn">
+    <label for="fh">Judul halaman utama</label><input id="fh">
+    <label for="ft">Deskripsi singkat</label><textarea id="ft" rows="2"></textarea>
+    <label for="fa">Alamat</label><textarea id="fa" rows="2"></textarea>
+    <label for="fp">Telepon</label><input id="fp">
+    <label for="fe">Email</label><input id="fe" type="email">
+    <label for="fj">Jam layanan</label><input id="fj">
+    <label for="u1">Logo sekolah</label><input id="u1" type="file" accept="image/*">
+    <label for="u2">Foto utama beranda</label><input id="u2" type="file" accept="image/*">
+    <label for="u3">Foto di kontak</label><input id="u3" type="file" accept="image/*">
+    <label for="u4">Tambah foto galeri</label><input id="u4" type="file" accept="image/*">
+    <div class="row"><button class="btn alt" id="saveC">Simpan perubahan</button></div>
+  </div>
+  <div class="panel hide" id="admin2">
+    <h3>Tulis berita</h3>
+    <label for="nt">Judul</label><input id="nt">
+    <label for="nx">Isi</label><textarea id="nx" rows="4"></textarea>
+    <div class="row"><button class="btn" id="addN">Terbitkan berita</button><button class="btn sm alt" id="delN">Hapus berita terbaru</button></div>
+    <div class="row"><button class="btn sm" id="out">Keluar</button><button class="btn sm" id="rst">Kembalikan data awal</button></div>
+    <div class="msg" id="amsg"></div>
+  </div>
+  <div class="panel hide" id="admin4">
+    <h3>Profil, statistik, dan kontak</h3>
+    <label for="xk">Nama kepala sekolah</label><input id="xk">
+    <label for="u5">Foto kepala sekolah</label><input id="u5" type="file" accept="image/*">
+    <label for="xs">Sambutan</label><textarea id="xs" rows="3"></textarea>
+    <label for="xv">Visi</label><textarea id="xv" rows="2"></textarea>
+    <label for="xm">Misi (satu baris satu poin)</label><textarea id="xm" rows="4"></textarea>
+    <label for="xr">Prestasi (satu baris satu prestasi)</label><textarea id="xr" rows="3"></textarea>
+    <label for="xi">Jumlah siswa</label><input id="xi">
+    <label for="xg">Jumlah guru</label><input id="xg">
+    <label for="xc">Jumlah prestasi</label><input id="xc">
+    <label for="xw">Nomor WhatsApp (awali 62)</label><input id="xw" inputmode="numeric">
+    <label for="xp">Lokasi di peta (kosong = pakai alamat)</label><input id="xp">
+    <div class="row"><button class="btn alt" id="saveX">Simpan</button></div>
+  </div>
+  <div class="panel hide" id="admin5">
+    <h3>Kelas dan agenda</h3>
+    <label for="ck">Rombel</label><select id="ck"><option>1A</option><option>1B</option><option>1C</option><option>2A</option><option>2B</option><option>2C</option><option>3A</option><option>3B</option><option>3C</option><option>4A</option><option>4B</option><option>4C</option><option>5A</option><option>5B</option><option>5C</option><option>6A</option><option>6B</option><option>6C</option></select>
+    <label for="cw">Wali kelas rombel ini</label><input id="cw">
+    <label for="cj">Jadwal pelajaran (satu baris satu hari)</label><textarea id="cj" rows="5"></textarea>
+    <label for="ag">Agenda (format Hari|Kegiatan, satu baris satu agenda)</label><textarea id="ag" rows="4"></textarea>
+    <div class="row"><button class="btn alt" id="saveK">Simpan</button></div>
+    <h3 style="margin-top:20px">Guru dan staf</h3>
+    <label for="gn">Nama</label><input id="gn">
+    <label for="gj">Jabatan atau mata pelajaran</label><input id="gj">
+    <label for="gf">Foto (opsional)</label><input id="gf" type="file" accept="image/*">
+    <div class="row"><button class="btn" id="addG">Tambah guru</button></div><div id="gl"></div>
+  </div>
+  <div class="panel hide" id="admin6">
+    <h3>Pengumuman</h3>
+    <label for="at">Judul</label><input id="at">
+    <label for="ax">Isi</label><textarea id="ax" rows="3"></textarea>
+    <label for="af">Berkas PDF (maksimal 700 KB, opsional)</label><input id="af" type="file" accept="application/pdf">
+    <div class="row"><button class="btn" id="addA">Terbitkan pengumuman</button></div><div id="annAdm"></div>
+  </div>
+  <div class="panel hide" id="admin3" style="grid-column:1/-1">
+    <h3>Pendaftar PPDB</h3>
+    <div id="plist"></div>
+    <div class="row"><button class="btn sm" id="csv">Unduh CSV</button><button class="btn sm alt" id="pre">Muat ulang</button></div>
+    <div class="msg" id="pmsg2"></div>
+  </div>
+</div></div>
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="#beranda"><img id="logo" alt="Logo sekolah"><span id="nm"></span></a>
+  <nav>
+    <a href="#beranda">Beranda</a><a href="#berita">Berita</a><a href="#profil">Profil</a><a href="#kelas">Kelas</a>
+    <a href="#agenda">Agenda</a><a href="#ppdb">PPDB</a><a href="#galeri">Galeri</a><a class="cta" href="#kontak">Kontak Kami</a>
+  </nav>
+</div></header>
+
+<div class="hero" id="beranda"><div class="wrap">
+  <div>
+    <h1 id="hn"></h1>
+    <p id="ht"></p>
+    <a class="btn alt" href="#kontak">Hubungi sekolah</a>
+  </div>
+  <div class="stage"><div class="photo" id="hp" role="img" aria-label="Foto sekolah"></div><div class="coinwrap" aria-hidden="true"><div class="coin"><img id="coinB" alt=""><i style="--z:-6px"></i><i style="--z:-4px"></i><i style="--z:-2px"></i><i style="--z:0px"></i><i style="--z:2px"></i><i style="--z:4px"></i><i style="--z:6px"></i><img id="coinF" alt=""></div></div></div>
+</div></div>
+
+<div class="statband"><div class="wrap" id="stats"></div></div>
+
+<section id="berita"><div class="wrap news">
+  <h2>Kabar sekolah</h2><p class="sub">Pengumuman dan berita terbaru untuk orang tua dan siswa.</p>
+  <div class="grid" id="newsList"></div>
+  <h2 style="margin-top:36px">Pengumuman</h2><p class="sub">Surat edaran dan informasi resmi. Berkas PDF bisa diunduh.</p>
+  <div class="grid" id="annList"></div>
+</div></section>
+
+<section id="profil"><div class="wrap">
+  <h2>Profil sekolah</h2><p class="sub">Mengenal sekolah, visi, dan guru kami.</p>
+  <div class="sam"><div class="kimg" id="kimg" role="img" aria-label="Foto kepala sekolah"></div>
+    <div><h3>Sambutan kepala sekolah</h3><p id="sam"></p><b id="kn"></b></div></div>
+  <div class="vm"><div class="panel"><h3>Visi</h3><p id="visi"></p></div><div class="panel"><h3>Misi</h3><ul id="misi"></ul></div></div>
+  <h3 style="margin-top:28px">Guru dan staf</h3><div class="gurus" id="guruList"></div>
+  <h3 style="margin-top:28px">Prestasi</h3><ul id="pres"></ul>
+</div></section>
+
+<section id="kelas" style="background:var(--sky)"><div class="wrap">
+  <h2>Kelas dan rombel</h2><p class="sub">Setiap kelas punya tiga rombel (A, B, C) dengan wali kelas dan jadwal sendiri.</p>
+  <div class="grades" id="gr"></div>
+  <div class="panel kd" id="kd"></div>
+</div></section>
+
+<section id="ppdb"><div class="wrap">
+  <h2>Pendaftaran siswa baru</h2><p class="sub">Isi formulir ini. Panitia akan menghubungi orang tua lewat WhatsApp.</p>
+  <form id="pf" class="panel pform">
+    <div><label for="pn">Nama lengkap anak</label><input id="pn" required maxlength="80"></div>
+    <div><label for="pt">Tanggal lahir</label><input id="pt" type="date" required></div>
+    <div><label for="pg">Jenis kelamin</label><select id="pg" required><option value="">Pilih</option><option>Laki-laki</option><option>Perempuan</option></select></div>
+    <div><label for="pk">Asal TK (jika ada)</label><input id="pk" maxlength="80"></div>
+    <div><label for="po">Nama orang tua atau wali</label><input id="po" required maxlength="80"></div>
+    <div><label for="ph">Nomor WhatsApp</label><input id="ph" type="tel" required maxlength="20"></div>
+    <div class="full"><label for="pa">Alamat</label><textarea id="pa" rows="2" required maxlength="200"></textarea></div>
+    <input id="hp2" class="hide" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="full row"><button class="btn alt" type="submit">Kirim pendaftaran</button></div>
+    <div class="full msg" id="pmsg"></div>
+  </form>
+</div></section>
+
+<section id="agenda"><div class="wrap agenda">
+  <h2>Agenda</h2><p class="sub">Jadwal kegiatan yang akan datang.</p>
+  <ul id="agl"></ul>
+</div></section>
+
+<section id="galeri" style="background:var(--sky)"><div class="wrap">
+  <h2>Galeri</h2><p class="sub">Momen belajar dan bermain di sekolah.</p>
+  <div class="gal" id="gal"></div>
+</div></section>
+
+<section class="contact" id="kontak"><div class="wrap cwrap">
+  <div><h2>Kontak kami</h2><dl id="cinfo"></dl><a class="btn alt hide" id="wab" target="_blank" rel="noopener" style="margin-top:16px">Chat WhatsApp</a></div>
+  <div><img class="cimg hide" id="cimg" alt="Foto gedung sekolah"><iframe class="map" id="map" title="Peta lokasi sekolah" loading="lazy"></iframe></div>
+</div></section>
+
+<a class="wafl hide" id="wafl" target="_blank" rel="noopener">WhatsApp</a>
+<footer><span id="ft2"></span></footer>
+
+<script type="module">
+// Isi data Firebase Anda di sini (lihat README). Jika kosong, situs berjalan dalam mode demo di peramban.
+var FIREBASE_CONFIG = {apiKey:"", authDomain:"", projectId:"", appId:""};
+var CLOUD = !!FIREBASE_CONFIG.apiKey, fb = {};
+if (CLOUD) {
+  var V = "https://www.gstatic.com/firebasejs/10.12.2/";
+  var A = await import(V + "firebase-app.js");
+  fb.Au = await import(V + "firebase-auth.js");
+  fb.St = await import(V + "firebase-firestore.js");
+  var app = A.initializeApp(FIREBASE_CONFIG);
+  fb.auth = fb.Au.getAuth(app); fb.db = fb.St.getFirestore(app);
+}
+// Hanya untuk mode demo. Di mode Firebase, login memakai email dan kata sandi akun admin.
+var ADMIN_PASSWORD = "admin123";
+var KEY = "sd-pelangi-data";
+var DEF = {
+  name:"SD Negeri Pelangi", title:"Belajar gembira, tumbuh bersama",
+  text:"Sekolah dasar yang menemani anak mengenal huruf, angka, dan dunia di sekitarnya dengan rasa ingin tahu.",
+  address:"Jl. Melati No. 12, Kelurahan Sukamaju", phone:"(021) 555-0123", email:"info@sdpelangi.sch.id", hours:"Senin sampai Jumat, 07.00 sampai 14.00",
+  logo:"", hero:"", cimg:"", gallery:[], kfoto:"", files:{},
+  visi:"Menjadi sekolah yang ceria, berprestasi, dan berakhlak mulia.",
+  misi:"Menumbuhkan rasa ingin tahu dan cinta membaca\nMembiasakan sikap jujur, santun, dan peduli\nMengembangkan bakat seni dan olahraga\nBekerja sama dengan orang tua dan masyarakat",
+  sambutan:"Selamat datang di website sekolah kami. Kami percaya setiap anak istimewa dan belajar paling baik saat merasa aman, dihargai, dan gembira.",
+  kepsek:"Nama Kepala Sekolah",
+  prestasi:"Juara 2 Cerdas Cermat tingkat kecamatan\nJuara 1 Lomba Menari Daerah tingkat kota\nJuara 3 Olimpiade Matematika tingkat kabupaten",
+  stat:{siswa:"240",guru:"14",prestasi:"12"},
+  wali:{"1A":"Bu Rina","1B":"Bu Tuti","1C":"Pak Anto","2A":"Pak Dedi","2B":"Bu Wati","2C":"Pak Budi","3A":"Bu Sari","3B":"Pak Hasan","3C":"Bu Yuni","4A":"Pak Joko","4B":"Bu Mira","4C":"Pak Agus","5A":"Bu Lina","5B":"Pak Fajar","5C":"Bu Dewi","6A":"Pak Eko","6B":"Bu Nina","6C":"Pak Rudi"}, jadwal:{},
+  agenda:"Senin|Upacara bendera dan senam pagi\nRabu|Pramuka kelas 3 sampai 6\nJumat|Jumat bersih dan literasi 15 menit\nSabtu|Ekstrakurikuler seni dan olahraga",
+  guru:[], ann:[{t:"Pembagian rapor semester ganjil",x:"Rapor dibagikan oleh wali kelas. Orang tua diharapkan hadir.",d:"2026-11-01"}],
+  wa:"6281234567890", mapq:"",
+  news:[
+    {t:"Penerimaan siswa baru dibuka", x:"Pendaftaran kelas 1 dibuka mulai bulan depan. Bawa akta kelahiran dan kartu keluarga.", d:"2026-11-02"},
+    {t:"Jadwal pembagian rapor", x:"Rapor semester ganjil dibagikan oleh wali kelas kepada orang tua di ruang kelas masing-masing.", d:"2026-10-28"},
+    {t:"Lomba kebersihan antar kelas", x:"Kelas dengan taman dan ruang paling rapi akan mendapat piala bergilir.", d:"2026-10-20"}
+  ]
+};
+var D, isAdmin = false;
+function load(){try{var s=localStorage.getItem(KEY);D=s?Object.assign({},DEF,JSON.parse(s)):JSON.parse(JSON.stringify(DEF))}catch(e){D=JSON.parse(JSON.stringify(DEF))}}
+function fail(){say("Gagal menyimpan ke server. Pastikan Anda sudah masuk sebagai admin.")}
+function save(){
+  if(CLOUD){var c=Object.assign({},D);["logo","hero","cimg","gallery","kfoto","files"].forEach(function(k){delete c[k]});
+    fb.St.setDoc(fb.St.doc(fb.db,"site","data"),c).catch(fail);return true}
+  try{localStorage.setItem(KEY,JSON.stringify(D));return true}catch(e){say("Penyimpanan penuh. Gunakan foto yang lebih kecil.");return false}}
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function say(m){$("amsg").textContent=m}
+function fmt(d){try{return new Date(d).toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"})}catch(e){return d}}
+function bg(el,src){el.style.backgroundImage=src?"url("+src+")":""}
+function render(){
+  $("nm").textContent=D.name; document.title=D.name+" – Website Sekolah";
+  $("hn").textContent=D.title; $("ht").textContent=D.text;
+  $("logo").src=D.logo||"data:image/svg+xml,"+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' fill='#ffc83d'/><text x='20' y='27' font-size='20' text-anchor='middle' fill='#17306b' font-family='sans-serif' font-weight='bold'>SD</text></svg>");
+  bg($("hp"),D.hero);
+  $("newsList").innerHTML=D.news.map(function(n){return "<article><time>"+esc(fmt(n.d))+"</time><h3>"+esc(n.t)+"</h3><p>"+esc(n.x)+"</p></article>"}).join("")||"<p>Belum ada berita.</p>";
+  var cols=["#ffd9d2","#ffe9a8","#c9f0d9","#cfe3ff","#e6d9ff","#ffd9ec"];
+  var g=D.gallery.map(function(s){return '<div style="background-image:url('+s+')"></div>'});
+  while(g.length<6)g.push('<div style="--c:'+cols[g.length%6]+'"></div>');
+  $("gal").innerHTML=g.join("");
+  $("cinfo").innerHTML="<dt>Alamat</dt><dd>"+esc(D.address)+"</dd><dt>Telepon</dt><dd>"+esc(D.phone)+"</dd><dt>Email</dt><dd>"+esc(D.email)+"</dd><dt>Jam layanan</dt><dd>"+esc(D.hours)+"</dd>";
+  var im=$("cimg"); if(D.cimg){im.src=D.cimg;im.classList.remove("hide")}else im.classList.add("hide");
+  $("ft2").textContent="© "+new Date().getFullYear()+" "+D.name+".";
+  renderMore();ui();
+}
+function ui(){["admin","admin2","admin3","admin4","admin5","admin6"].forEach(function(i){$(i).classList.toggle("hide",!isAdmin)});
+  $("adm").textContent=isAdmin?($("drawer").classList.contains("open")?"Tutup panel":"Buka panel"):"Masuk admin"}
+function fill(){fillX();["n:name","h:title","t:text","a:address","p:phone","e:email","j:hours"].forEach(function(p){var k=p.split(":");$("f"+k[0]).value=D[k[1]]})}
+function shrink(file,cb,mx){
+  var r=new FileReader();
+  r.onload=function(){var im=new Image();im.onload=function(){
+    var m=mx||800,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");
+    c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+    cb(c.toDataURL("image/jpeg",.72))};im.src=r.result};
+  r.readAsDataURL(file);
+}
+function up(id,key){$(id).addEventListener("change",function(e){var f=e.target.files[0];if(!f)return;
+  shrink(f,function(u){
+    if(key==="gal")D.gallery.push(u);else D[key]=u;
+    if(CLOUD){var n=key==="gal"?"gal_"+Date.now():key;
+      fb.St.setDoc(fb.St.doc(fb.db,"media",n),{src:u,key:key,t:Date.now()}).then(function(){render();say("Foto tersimpan.")}).catch(fail)}
+    else if(save()){render();say("Foto tersimpan.")}});
+  e.target.value=""})}
+up("u1","logo");up("u2","hero");up("u3","cimg");up("u4","gal");up("u5","kfoto");
+
+$("adm").addEventListener("click",function(){
+  var d=$("drawer");d.classList.toggle("open");
+  if(!isAdmin)$("login").classList.toggle("hide",!d.classList.contains("open"));
+  ui()});
+function enter(){isAdmin=true;$("drawer").classList.add("open");$("login").classList.add("hide");$("pw").value="";$("lmsg").textContent="";fill();render();pLoad()}
+$("goLogin").addEventListener("click",function(){
+  if(CLOUD)fb.Au.signInWithEmailAndPassword(fb.auth,$("em").value,$("pw").value).then(enter).catch(function(){$("lmsg").textContent="Email atau kata sandi salah."});
+  else if($("pw").value===ADMIN_PASSWORD)enter();
+  else $("lmsg").textContent="Kata sandi salah. Coba lagi."});
+$("out").addEventListener("click",function(){if(CLOUD)fb.Au.signOut(fb.auth);isAdmin=false;$("drawer").classList.remove("open");render()});
+$("saveC").addEventListener("click",function(){
+  D.name=$("fn").value;D.title=$("fh").value;D.text=$("ft").value;D.address=$("fa").value;D.phone=$("fp").value;D.email=$("fe").value;D.hours=$("fj").value;
+  if(save()){render();say("Perubahan tersimpan.")}});
+$("addN").addEventListener("click",function(){
+  var t=$("nt").value.trim(),x=$("nx").value.trim();if(!t){say("Isi judul berita dahulu.");return}
+  D.news.unshift({t:t,x:x,d:new Date().toISOString().slice(0,10)});
+  if(save()){$("nt").value="";$("nx").value="";render();say("Berita terbit.")}});
+$("delN").addEventListener("click",function(){D.news.shift();if(save()){render();say("Berita terbaru dihapus.")}});
+$("rst").addEventListener("click",function(){if(confirm("Semua perubahan akan dihapus. Lanjutkan?")){try{localStorage.removeItem(KEY)}catch(e){}load();fill();render();say("Data awal dikembalikan.")}});
+var TS=".news article,.grades div,.gal div,.hero .photo,.vm .panel,#stats div,.gu,.kimg,.cimg";
+document.addEventListener("pointermove",function(e){
+  var t=e.target.closest&&e.target.closest(TS);if(!t||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  var r=t.getBoundingClientRect();
+  t.style.setProperty("--ry",(((e.clientX-r.left)/r.width-.5)*16)+"deg");
+  t.style.setProperty("--rx",(-((e.clientY-r.top)/r.height-.5)*16)+"deg")});
+document.addEventListener("pointerout",function(e){
+  var t=e.target.closest&&e.target.closest(TS);
+  if(t&&!t.contains(e.relatedTarget)){t.style.removeProperty("--rx");t.style.removeProperty("--ry")}});
+
+var COLS=["#ffd9d2","#ffe9a8","#c9f0d9","#cfe3ff","#e6d9ff","#ffd9ec"],selK="1",selR="A";
+var DJ="Senin: Matematika, Bahasa Indonesia\nSelasa: IPAS, Seni Budaya\nRabu: Bahasa Inggris, Pramuka\nKamis: PJOK, Pendidikan Agama\nJumat: Literasi, Jumat bersih";
+function lines(t){return String(t||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
+function li(a){return a.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")}
+function fixR(){
+  if(Array.isArray(D.wali)){var o={};D.wali.forEach(function(n,i){["A","B","C"].forEach(function(r,j){o[(i+1)+r]=j?"":n})});D.wali=o}
+  var j=D.jadwal||{};["1","2","3","4","5","6"].forEach(function(k){if(j[k]){["A","B","C"].forEach(function(r){if(!j[k+r])j[k+r]=j[k]});delete j[k]}});D.jadwal=j}
+function showK(){
+  fixR();var key=selK+selR;
+  $("kd").innerHTML='<div class="rb">'+["A","B","C"].map(function(r){return '<button class="btn sm'+(r===selR?"":" alt")+'" data-r="'+r+'">Rombel '+selK+r+"</button>"}).join("")+"</div><h3>Jadwal kelas "+key+"</h3><p>Wali kelas: "+esc(D.wali[key]||"-")+"</p><ul>"+li(lines(D.jadwal[key]||DJ))+"</ul>"}
+function renderMore(){
+  fixR();
+  $("stats").innerHTML=[["siswa","Siswa"],["guru","Guru"],["prestasi","Prestasi"]].map(function(k){return "<div><b>"+esc(D.stat[k[0]])+"</b>"+k[1]+"</div>"}).join("");
+  $("sam").textContent=D.sambutan;$("kn").textContent=D.kepsek;$("visi").textContent=D.visi;bg($("kimg"),D.kfoto);
+  $("misi").innerHTML=li(lines(D.misi));$("pres").innerHTML=li(lines(D.prestasi));
+  $("guruList").innerHTML=D.guru.map(function(g){return '<div class="gu"><div class="av"'+(g.f?' style="background-image:url('+g.f+')"':"")+">"+(g.f?"":esc(g.n.charAt(0)))+"</div><b>"+esc(g.n)+"</b><span>"+esc(g.j)+"</span></div>"}).join("")||"<p>Data guru belum diisi.</p>";
+  $("gl").innerHTML=D.guru.map(function(g,i){return '<div class="pitem"><span>'+esc(g.n)+'</span><button class="btn sm" data-g="'+i+'">Hapus</button></div>'}).join("");
+  $("gr").innerHTML=[1,2,3,4,5,6].map(function(k){return '<div tabindex="0" role="button" data-k="'+k+'"'+(String(k)===selK?' class="on"':"")+' style="--c:'+COLS[k-1]+'">'+k+"<small>Rombel "+k+"A, "+k+"B, "+k+"C</small></div>"}).join("");
+  showK();
+  $("agl").innerHTML=lines(D.agenda).map(function(x){var p=x.split("|");return "<li><b>"+esc(p[0])+"</b><span>"+esc(p.slice(1).join("|"))+"</span></li>"}).join("");
+  $("annList").innerHTML=D.ann.map(function(a){return "<article><time>"+esc(fmt(a.d))+"</time><h3>"+esc(a.t)+"</h3><p>"+esc(a.x||"")+"</p>"+(a.f?'<button class="btn sm alt" data-f="'+esc(a.f)+'" data-n="'+esc(a.fn||"pengumuman.pdf")+'">Unduh PDF</button>':"")+"</article>"}).join("")||"<p>Belum ada pengumuman.</p>";
+  $("annAdm").innerHTML=D.ann.map(function(a,i){return '<div class="pitem"><span>'+esc(a.t)+'</span><button class="btn sm" data-d="'+i+'">Hapus</button></div>'}).join("");
+  var ls=$("logo").getAttribute("src");
+  if($("coinF").getAttribute("src")!==ls){$("coinF").src=ls;$("coinB").src=ls}
+  var w=String(D.wa||"").replace(/\D/g,""),h="https://wa.me/"+w+"?text="+encodeURIComponent("Halo, saya ingin bertanya tentang "+D.name);
+  ["wab","wafl"].forEach(function(i){$(i).classList.toggle("hide",!w);$(i).href=h});
+  var u="https://maps.google.com/maps?q="+encodeURIComponent(D.mapq||D.address)+"&output=embed";
+  if($("map").getAttribute("src")!==u)$("map").setAttribute("src",u);
+}
+var XM={xv:"visi",xm:"misi",xs:"sambutan",xk:"kepsek",xr:"prestasi",xw:"wa",xp:"mapq"};
+function kSel(){fixR();var k=$("ck").value;$("cw").value=D.wali[k]||"";$("cj").value=D.jadwal[k]||DJ}
+function fillX(){for(var k in XM)$(k).value=D[XM[k]]||"";$("xi").value=D.stat.siswa;$("xg").value=D.stat.guru;$("xc").value=D.stat.prestasi;$("ag").value=D.agenda;kSel()}
+function getFile(id){return D.files[id]?Promise.resolve(D.files[id]):CLOUD?fb.St.getDoc(fb.St.doc(fb.db,"files",id)).then(function(d){return d.data().src}):Promise.reject()}
+function pick(e){var t=e.target.closest("[data-k]");if(!t)return;selK=t.dataset.k;[].forEach.call($("gr").children,function(c){c.classList.toggle("on",c.dataset.k===selK)});showK()}
+$("gr").addEventListener("click",pick);
+$("gr").addEventListener("keydown",function(e){if(e.key==="Enter")pick(e)});
+$("ck").addEventListener("change",kSel);
+$("kd").addEventListener("click",function(e){var b=e.target.closest("[data-r]");if(b){selR=b.dataset.r;showK()}});
+$("saveX").addEventListener("click",function(){
+  for(var k in XM)D[XM[k]]=$(k).value;
+  D.wa=D.wa.replace(/\D/g,"");D.stat={siswa:$("xi").value,guru:$("xg").value,prestasi:$("xc").value};
+  if(save()){render();say("Profil dan kontak tersimpan.")}});
+$("saveK").addEventListener("click",function(){
+  var k=$("ck").value;D.wali[k]=$("cw").value;D.jadwal[k]=$("cj").value;D.agenda=$("ag").value;
+  if(save()){render();say("Kelas dan agenda tersimpan.")}});
+$("addG").addEventListener("click",function(){
+  var n=$("gn").value.trim();if(!n){say("Isi nama guru dahulu.");return}
+  var g={n:n,j:$("gj").value.trim()},f=$("gf").files[0];
+  function done(){D.guru.push(g);if(save()){$("gn").value="";$("gj").value="";$("gf").value="";render();say("Guru ditambahkan.")}}
+  if(f)shrink(f,function(u){g.f=u;done()},240);else done()});
+$("gl").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;D.guru.splice(+b.dataset.g,1);if(save()){render();say("Guru dihapus.")}});
+$("addA").addEventListener("click",function(){
+  var t=$("at").value.trim();if(!t){say("Isi judul pengumuman dahulu.");return}
+  var f=$("af").files[0],a={t:t,x:$("ax").value.trim(),d:new Date().toISOString().slice(0,10)};
+  function done(){D.ann.unshift(a);if(save()){$("at").value="";$("ax").value="";$("af").value="";render();say("Pengumuman terbit.")}}
+  if(!f){done();return}
+  if(f.type!=="application/pdf"||f.size>700000){say("Berkas harus PDF dan maksimal 700 KB.");return}
+  var r=new FileReader();
+  r.onload=function(){var id="f"+Date.now();a.f=id;a.fn=f.name;
+    if(CLOUD)fb.St.setDoc(fb.St.doc(fb.db,"files",id),{src:r.result,t:Date.now()}).then(done).catch(fail);
+    else{D.files[id]=r.result;done()}};
+  r.readAsDataURL(f)});
+$("annAdm").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;var a=D.ann.splice(+b.dataset.d,1)[0];
+  if(a&&a.f){if(CLOUD)fb.St.deleteDoc(fb.St.doc(fb.db,"files",a.f)).catch(function(){});else delete D.files[a.f]}
+  if(save()){render();say("Pengumuman dihapus.")}});
+$("annList").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  getFile(b.dataset.f).then(function(u){var a=document.createElement("a");a.href=u;a.download=b.dataset.n;a.click()}).catch(function(){alert("Berkas tidak dapat dibuka.")})});
+var PK="sd-pelangi-ppdb",P=[];
+function pRender(){
+  P.sort(function(a,b){return b.t-a.t});
+  $("plist").innerHTML=P.length?P.map(function(r){var i=esc(r.id);return '<div class="pitem"><div><b>'+esc(r.nama)+'</b> ('+esc(r.jk)+', lahir '+esc(r.lahir)+')<br>Orang tua: '+esc(r.ortu)+'. WA: '+esc(r.hp)+'<br>'+esc(r.alamat)+(r.tk?'. Asal TK: '+esc(r.tk):'')+'<br><em>Status: '+esc(r.status||"baru")+'</em></div><div class="row"><button class="btn sm" data-i="'+i+'" data-a="diterima">Terima</button><button class="btn sm alt" data-i="'+i+'" data-a="ditolak">Tolak</button><button class="btn sm" data-i="'+i+'" data-a="hapus">Hapus</button></div></div>'}).join(""):"<p>Belum ada pendaftar.</p>"}
+function pLoad(){
+  if(CLOUD){fb.St.getDocs(fb.St.collection(fb.db,"ppdb")).then(function(q){P=q.docs.map(function(d){return Object.assign({},d.data(),{id:d.id})});pRender()}).catch(function(){$("pmsg2").textContent="Gagal memuat pendaftar."})}
+  else{try{P=JSON.parse(localStorage.getItem(PK)||"[]")}catch(e){P=[]}pRender()}}
+function pSave(){if(!CLOUD)try{localStorage.setItem(PK,JSON.stringify(P))}catch(e){}}
+$("pre").addEventListener("click",pLoad);
+$("plist").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;var id=b.dataset.i,a=b.dataset.a,r=P.find(function(x){return x.id===id});if(!r)return;
+  if(a==="hapus"){if(!confirm("Hapus data pendaftar ini?"))return;P=P.filter(function(x){return x.id!==id});
+    if(CLOUD)fb.St.deleteDoc(fb.St.doc(fb.db,"ppdb",id)).catch(fail)}
+  else{r.status=a;if(CLOUD)fb.St.updateDoc(fb.St.doc(fb.db,"ppdb",id),{status:a}).catch(fail)}
+  pSave();pRender()});
+$("pf").addEventListener("submit",function(e){
+  e.preventDefault();if($("hp2").value)return;
+  var r={nama:$("pn").value.trim(),lahir:$("pt").value,jk:$("pg").value,ortu:$("po").value.trim(),hp:$("ph").value.trim(),alamat:$("pa").value.trim(),tk:$("pk").value.trim(),status:"baru",t:Date.now()};
+  function ok(){$("pf").reset();$("pmsg").textContent="Pendaftaran terkirim. Panitia akan menghubungi Anda lewat WhatsApp."}
+  if(CLOUD)fb.St.addDoc(fb.St.collection(fb.db,"ppdb"),r).then(ok).catch(function(){$("pmsg").textContent="Gagal mengirim. Coba lagi sebentar lagi."});
+  else{var a;try{a=JSON.parse(localStorage.getItem(PK)||"[]")}catch(x){a=[]}r.id="p"+Date.now();a.push(r);try{localStorage.setItem(PK,JSON.stringify(a))}catch(x){}ok()}});
+$("csv").addEventListener("click",function(){
+  var h=["nama","lahir","jk","ortu","hp","alamat","tk","status"];
+  function q(v){v=String(v||"");if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'}
+  var c=[h.join(",")].concat(P.map(function(r){return h.map(function(k){return q(r[k])}).join(",")})).join("\n");
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+c],{type:"text/csv"}));a.download="pendaftar-ppdb.csv";a.click()});
+async function loadCloud(){
+  try{var S=fb.St,d=await S.getDoc(S.doc(fb.db,"site","data"));
+    if(d.exists())D=Object.assign({},DEF,d.data(),{logo:"",hero:"",cimg:"",gallery:[],kfoto:"",files:{}});
+    var m=await S.getDocs(S.collection(fb.db,"media")),g=[];
+    m.forEach(function(x){var v=x.data();if(v.key==="gal")g.push(v);else D[v.key]=v.src});
+    g.sort(function(a,b){return a.t-b.t});D.gallery=g.map(function(v){return v.src})}catch(e){}
+  render()}
+if("IntersectionObserver" in window&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.06});
+  document.querySelectorAll("section>.wrap,.statband>.wrap").forEach(function(el){el.classList.add("rv");io.observe(el)})}
+if(!CLOUD){$("em").classList.add("hide");$("eml").classList.add("hide")}
+else{$("rst").classList.add("hide");fb.Au.onAuthStateChanged(fb.auth,function(u){if(u&&!isAdmin){isAdmin=true;fill();render();pLoad()}})}
+load();render();if(CLOUD)loadCloud();
+</script>
+</body>
+</html>
